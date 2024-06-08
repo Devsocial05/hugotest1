@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>{{ block "title" . }}{{ .Params.meta_title | default (printf "%s - %s" .Title .Site.Title) }}{{ end }}
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/png" href="{{ .Site.Params.favicon | relURL }}">
+
+		<!-- CSS only -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+			rel="stylesheet">
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/aos.css" />
+		<link rel="stylesheet" type="text/css" href="css/slick.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/responsive.css" />
+		<link rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
+
+
+		{{ block "header_css" . }}{{ end }}
+
+		{{ block "meta_tags" . }}
+		{{ with .Params.description }}
+		<meta name="description" content="{{ . }}" />{{ end }}
+		<meta property="og:title" content="{{ .Params.meta_title | default .Title }}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="{{ .Permalink }}" />
+		{{ with .Params.image | default .Site.Params.seo.meta_og_image }}
+		<meta property="og:image" content="{{ . | absURL }}" />{{ end }}
+		{{ with .Params.description }}
+		<meta property="og:description" content="{{ . }}" />{{ end }}
+		<meta name="twitter:card" content="summary" />
+		{{ with .Site.Params.seo.meta_twitter_site }}
+		<meta name="twitter:site" content="{{ . }}" />{{ end }}
+		{{ with .Site.Params.seo.meta_twitter_creator }}
+		<meta name="twitter:creator" content="{{ . }}" />{{ end }}
+		{{ end }}
+
+	</head>
+
+	<body class='{{ block "body_classes" . }}{{ end }}'>
+		<div class="main-wrpper">
+			{{ partial "header.html" . }}
+			{{ block "main" . }}
+			{{ end }}
+
+			{{ partial "footer.html" . }}
+
+			<a id="button"></a>
+
+			<!-- script -->
+			<script src="js/jquery.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+			<script src="js/bootstrap.bundle.min.js"></script>
+			<script src="js/slick.min.js"></script>
+			<script src="js/aos.js"></script>
+			<script src="js/custom.js"></script>
+			<!-- End script -->
+
+			{{ partial "google-tag-manager.html" . }}
+			{{ partial "google-analytics.html" . }}
+
+		</div>
+	</body>
+
+</html>
